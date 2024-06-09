@@ -27,6 +27,6 @@ jobs:
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
         run: |
           echo "Adding remote GitLab"
-          git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/teterocken/ProyectoMPS
+          git remote add gitlab https://oauth2:${GITLAB_TOKEN}@https://gitlab.com/teterocken/Proyecto_MPS
           git remote -v  # Verificar configuración de remotos después de añadir
           git push gitlab main  # o la rama que desees sincronizar
