@@ -15,8 +15,8 @@ jobs:
 
       - name: Set up Git
         run: |
-          git config --global user.email "you@example.com"
-          git config --global user.name "Your Name"
+          git config --global user.email "manuteterocken@gmail.com"
+          git config --global user.name "teterocken"
           git remote -v  # Verificar configuración de remotos
 
       - name: Debug Git Config
@@ -27,6 +27,6 @@ jobs:
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
         run: |
           echo "Adding remote GitLab"
-          git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/tu-usuario/nombre-repositorio.git
+          git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/teterocken/ProyectoMPS.git
           git remote -v  # Verificar configuración de remotos después de añadir
           git push gitlab main  # o la rama que desees sincronizar
