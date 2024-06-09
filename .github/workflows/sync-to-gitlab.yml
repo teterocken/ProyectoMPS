@@ -25,7 +25,7 @@ jobs:
         env:
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
         run: |
-          git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/teterocken/Proyecto_MPS.git
+          git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/teterocken/ProyectoMPS.git
           git fetch gitlab main  # Fetch the changes from GitLab
           git merge --no-commit --no-ff gitlab/main || echo "Merge conflicts detected"  # Attempt to merge
 
