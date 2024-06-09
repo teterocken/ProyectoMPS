@@ -18,7 +18,7 @@ jobs:
       - name: Set up Git
         run: |
           git config --global user.email "manuteterocken@gmail.com"
-          git config --global user.name "teterockem"
+          git config --global user.name "teterocken"
           git remote -v  # Verificar configuración de remotos
 
       - name: Pull from GitLab
@@ -27,7 +27,8 @@ jobs:
         run: |
           git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/teterocken/ProyectoMPS.git
           git fetch gitlab main  # Fetch the changes from GitLab
-          git merge --no-commit --no-ff gitlab/main || echo "Merge conflicts detected"  # Attempt to merge
+          git config pull.rebase false  # Configurar para hacer un merge
+          git pull gitlab main --allow-unrelated-histories  # Hacer pull de los cambios remotos
 
       - name: Check for merge conflicts
         run: |
