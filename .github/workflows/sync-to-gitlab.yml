@@ -19,14 +19,15 @@ jobs:
           git config --global user.name "teterocken"
           git remote -v  # Verificar configuración de remotos
 
-      - name: Debug Git Config
-        run: git config --list
+      - name: Pull from GitLab
+        env:
+          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+        run: |
+          git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/teterocken/Proyecto_MPS.git
+          git pull gitlab main --allow-unrelated-histories  # Hacer pull de los cambios remotos
 
       - name: Push to GitLab
         env:
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
         run: |
-          echo "Adding remote GitLab"
-          git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/teterocken/Proyecto_MPS
-          git remote -v  # Verificar configuración de remotos después de añadir
-          git push gitlab main  # o la rama que desees sincronizar
+          git push gitlab main  # Hacer push de los cambios locales
