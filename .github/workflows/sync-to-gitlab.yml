@@ -18,14 +18,14 @@ jobs:
       - name: Set up Git
         run: |
           git config --global user.email "manuteterocken@gmail.com"
-          git config --global user.name "teterocken"
+          git config --global user.name "teterockem"
           git remote -v  # Verificar configuración de remotos
 
       - name: Pull from GitLab
         env:
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
         run: |
-          git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/teterocken/ProyectoMPS.git
+          git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/teterocken/Proyecto_MPS.git
           git fetch gitlab main  # Fetch the changes from GitLab
           git merge --no-commit --no-ff gitlab/main || echo "Merge conflicts detected"  # Attempt to merge
 
@@ -36,11 +36,13 @@ jobs:
             exit 1
           fi
 
-      - name: Commit and Push to GitLab
-        if: success()  # Only run if previous steps were successful
+      - name: Commit changes if any
+        run: |
+          if ! git diff-index --quiet HEAD --; then
+            git commit -m "Merge changes from GitHub and GitLab"
+          fi
+
+      - name: Push to GitLab
         env:
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
-        run: |
-          git commit -m "Merge changes from GitHub and GitLab"
-          git push gitlab main  # Push the merged changes to GitLab
-
+        run: git push gitlab main  # Hacer push de los cambios locales
