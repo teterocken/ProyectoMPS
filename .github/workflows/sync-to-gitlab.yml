@@ -24,6 +24,7 @@ jobs:
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
         run: |
           git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/teterocken/Proyecto_MPS.git
+          git config pull.rebase false  # Configurar para hacer un merge
           git pull gitlab main --allow-unrelated-histories  # Hacer pull de los cambios remotos
 
       - name: Push to GitLab
