@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Clonar sin profundidad para evitar shallow update
 
       - name: Set up Git
         run: |
@@ -32,3 +34,4 @@ jobs:
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
         run: |
           git push gitlab main  # Hacer push de los cambios locales
+
